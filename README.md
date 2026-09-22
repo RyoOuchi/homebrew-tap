@@ -8,8 +8,7 @@ brew install ryoouchi/tap/presmith
 presmith --version
 ```
 
-The current formula installs the v0.2.0 prerelease for **Apple Silicon Macs with
-macOS 14 or newer**. Homebrew verifies the release archive's SHA-256 checksum and
+The formula supports **Apple Silicon Macs with macOS 14 or newer**. Homebrew verifies the release archive's SHA-256 checksum and
 installs Node.js 24 with npm. Presmith uses this tested runtime automatically;
 your shell's default Node version does not need to change. Rust is not required.
 
@@ -42,9 +41,19 @@ Uninstalling the CLI leaves your presentation projects intact.
 
 ## Maintain the formula
 
-After publishing a new [Presmith release](https://github.com/RyoOuchi/Presmith/releases),
-update the version in the formula's URL and the matching SHA-256 from that release's
-`SHA256SUMS`. Never replace an existing release archive in place.
+[Presmith's tagged-release workflow](https://github.com/RyoOuchi/Presmith/actions/workflows/release.yml)
+updates this formula automatically after building, publishing, and verifying a new
+release. It installs and tests the formula before pushing here. Follow the
+[release instructions](https://github.com/RyoOuchi/Presmith/blob/main/docs/releasing.md)
+to bump the project version and push its matching tag.
+
+A dedicated deploy key named `Presmith tagged releases` grants that workflow write
+access to this tap. Its private key is stored in Presmith's `HOMEBREW_TAP_SSH_KEY`
+Actions secret. No credentials belong in this repository.
+
+For manual recovery, update the formula URL and the matching SHA-256 from the
+published release's `SHA256SUMS`, and remove the old `revision` when the version
+changes. Never replace an existing release archive in place.
 
 Edit the formula in Homebrew's tap checkout (`brew --repository ryoouchi/tap`).
 On a supported Apple Silicon Mac, verify the change before pushing:
