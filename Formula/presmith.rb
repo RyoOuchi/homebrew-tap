@@ -19,13 +19,17 @@ class Presmith < Formula
 
   def caveats
     <<~EOS
-      Create a deck and install its local renderer:
+      Create a deck with its Codex skill and set up the renderer:
         presmith init my-talk
         cd my-talk
         presmith setup
         presmith edit --open
 
-      The setup command downloads Chromium and renderer packages into the deck.
+      Matching decks share cached Chromium and renderer packages.
+      Use presmith setup --local for a self-contained renderer installation.
+
+      To install the bundled Codex skill across all projects:
+        presmith skill install --global
     EOS
   end
 
@@ -39,5 +43,8 @@ class Presmith < Formula
     assert_path_exists testpath/"deck/lib/decksmith.js"
     assert_path_exists testpath/"deck/slides/intro.html"
     assert_path_exists testpath/"deck/tooling/renderer/pptx.mjs"
+    assert_path_exists testpath/"deck/.agents/skills/presmith/SKILL.md"
+    assert_path_exists testpath/"deck/.agents/skills/presmith/references/creation-workflows.md"
+    assert_path_exists testpath/"deck/.agents/skills/presmith/agents/openai.yaml"
   end
 end

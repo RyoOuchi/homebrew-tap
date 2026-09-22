@@ -22,9 +22,14 @@ presmith doctor
 presmith edit --open
 ```
 
-`presmith setup` downloads pinned renderer packages and Chromium into the deck's
-`tooling/renderer/` directory. For manual installation, exports, and the optional
-Codex skill, see the [installation guide](https://github.com/RyoOuchi/Presmith/blob/main/docs/install.md).
+`presmith init` includes the complete Codex skill in `.agents/skills/presmith/`;
+open the project in Codex and use `$presmith`. To install it across all projects,
+run `presmith skill install --global`.
+
+`presmith setup` reuses a shared cache of pinned renderer packages and Chromium
+across matching decks. Use `presmith setup --local` to keep dependencies inside
+one deck. For manual installation and exports, see the
+[installation guide](https://github.com/RyoOuchi/Presmith/blob/main/docs/install.md).
 
 ## Update or uninstall
 
@@ -66,7 +71,7 @@ brew test ryoouchi/tap/presmith
 ```
 
 The formula test creates a fresh deck and verifies its manifest and bundled runtime
-files without downloading browser dependencies. Presmith's release checks cover
+files and Codex skill without downloading browser dependencies. Presmith's release checks cover
 its browser workflow.
 
 Presmith and this tap are available under the MIT license.
