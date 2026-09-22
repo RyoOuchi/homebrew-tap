@@ -4,13 +4,15 @@ class Presmith < Formula
   url "https://github.com/RyoOuchi/Presmith/releases/download/v0.2.0/presmith-v0.2.0-aarch64-apple-darwin.tar.gz"
   sha256 "f5f10856a169b141bdfdfbd562639ee9c823e2860b70c6c591f54487900e55ae"
   license "MIT"
+  revision 1
 
   depends_on arch: :arm64
   depends_on macos: :sonoma
-  depends_on "node"
+  depends_on "node@24"
 
   def install
-    bin.install "presmith"
+    libexec.install "presmith"
+    (bin/"presmith").write_env_script libexec/"presmith", PATH: "#{Formula["node@24"].opt_bin}:$PATH"
     prefix.install "LICENSE"
     doc.install "README.md", "RELEASE-NOTES.md", "THIRD_PARTY_NOTICES.txt",
                 "RUST_STANDARD_LIBRARY_LICENSES.html", "BUILD-INFO.json"

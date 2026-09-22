@@ -10,7 +10,8 @@ presmith --version
 
 The current formula installs the v0.2.0 prerelease for **Apple Silicon Macs with
 macOS 14 or newer**. Homebrew verifies the release archive's SHA-256 checksum and
-installs Node.js with npm. Rust is not required.
+installs Node.js 24 with npm. Presmith uses this tested runtime automatically;
+your shell's default Node version does not need to change. Rust is not required.
 
 ## Create a presentation
 
@@ -45,6 +46,7 @@ After publishing a new [Presmith release](https://github.com/RyoOuchi/Presmith/r
 update the version in the formula's URL and the matching SHA-256 from that release's
 `SHA256SUMS`. Never replace an existing release archive in place.
 
+Edit the formula in Homebrew's tap checkout (`brew --repository ryoouchi/tap`).
 On a supported Apple Silicon Mac, verify the change before pushing:
 
 ```sh
