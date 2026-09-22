@@ -1,0 +1,41 @@
+class Presmith < Formula
+  desc "Create and edit local HTML presentations"
+  homepage "https://github.com/RyoOuchi/Presmith"
+  url "https://github.com/RyoOuchi/Presmith/releases/download/v0.2.0/presmith-v0.2.0-aarch64-apple-darwin.tar.gz"
+  sha256 "f5f10856a169b141bdfdfbd562639ee9c823e2860b70c6c591f54487900e55ae"
+  license "MIT"
+
+  depends_on arch: :arm64
+  depends_on macos: :sonoma
+  depends_on "node"
+
+  def install
+    bin.install "presmith"
+    prefix.install "LICENSE"
+    doc.install "README.md", "RELEASE-NOTES.md", "THIRD_PARTY_NOTICES.txt",
+                "RUST_STANDARD_LIBRARY_LICENSES.html", "BUILD-INFO.json"
+  end
+
+  def caveats
+    <<~EOS
+      Create a deck and install its local renderer:
+        presmith init my-talk
+        cd my-talk
+        presmith setup
+        presmith edit --open
+
+      The setup command downloads Chromium and renderer packages into the deck.
+    EOS
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/presmith --version")
+    system bin/"presmith", "init", testpath/"deck"
+    assert_path_exists testpath/"deck/deck.json"
+    assert_path_exists testpath/"deck/lib/LICENSE"
+    assert_path_exists testpath/"deck/tooling/renderer/package-lock.json"
+    system bin/"presmith", "export", testpath/"deck", "--format", "html"
+    assert_match "data-slide-id=\"intro\"", (testpath/"deck/dist/html/index.html").read
+    assert_path_exists testpath/"deck/dist/html/lib/decksmith.js"
+  end
+end
