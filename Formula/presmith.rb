@@ -12,7 +12,7 @@ class Presmith < Formula
 
   def install
     libexec.install "presmith"
-    (bin/"presmith").write_env_script libexec/"presmith", PATH: "#{Formula["node@24"].opt_bin}:$PATH"
+    (bin/"presmith").write_env_script libexec/"presmith", PATH: "#{formula_opt_bin("node@24")}:$PATH"
     prefix.install "LICENSE"
     doc.install "README.md", "RELEASE-NOTES.md", "THIRD_PARTY_NOTICES.txt",
                 "RUST_STANDARD_LIBRARY_LICENSES.html", "BUILD-INFO.json"
