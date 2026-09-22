@@ -54,7 +54,8 @@ brew reinstall ryoouchi/tap/presmith
 brew test ryoouchi/tap/presmith
 ```
 
-The formula test creates a fresh deck and exports HTML without downloading browser
-dependencies. Presmith's release checks cover its browser workflow.
+The formula test creates a fresh deck and verifies its manifest and bundled runtime
+files without downloading browser dependencies. Presmith's release checks cover
+its browser workflow.
 
 Presmith and this tap are available under the MIT license.

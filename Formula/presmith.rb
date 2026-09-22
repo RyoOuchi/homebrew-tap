@@ -31,11 +31,12 @@ class Presmith < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/presmith --version")
     system bin/"presmith", "init", testpath/"deck"
-    assert_path_exists testpath/"deck/deck.json"
+    manifest = JSON.parse((testpath/"deck/deck.json").read)
+    assert_equal %w[intro workflow next], manifest.fetch("slides").map { |slide| slide.fetch("id") }
     assert_path_exists testpath/"deck/lib/LICENSE"
     assert_path_exists testpath/"deck/tooling/renderer/package-lock.json"
-    system bin/"presmith", "export", testpath/"deck", "--format", "html"
-    assert_match "data-slide-id=\"intro\"", (testpath/"deck/dist/html/index.html").read
-    assert_path_exists testpath/"deck/dist/html/lib/decksmith.js"
+    assert_path_exists testpath/"deck/lib/decksmith.js"
+    assert_path_exists testpath/"deck/slides/intro.html"
+    assert_path_exists testpath/"deck/tooling/renderer/pptx.mjs"
   end
 end
