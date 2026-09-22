@@ -1,8 +1,8 @@
 class Presmith < Formula
   desc "Create and edit local HTML presentations"
   homepage "https://github.com/RyoOuchi/Presmith"
-  url "https://github.com/RyoOuchi/Presmith/releases/download/v0.2.1/presmith-v0.2.1-aarch64-apple-darwin.tar.gz"
-  sha256 "bd9eb5f65ea98cc38725758aa3cfc85e51eb8c3aea758132b26d894f2826b724"
+  url "https://github.com/RyoOuchi/Presmith/releases/download/v0.2.2/presmith-v0.2.2-aarch64-apple-darwin.tar.gz"
+  sha256 "c1eac2fe4c31427a9ff1a123cc915a5c84b98878a6a45e7190ef26071cd76e79"
   license "MIT"
 
   depends_on arch: :arm64
